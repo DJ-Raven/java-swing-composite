@@ -266,6 +266,7 @@ public class Main extends javax.swing.JFrame {
     }
     private void sliStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliStateChanged
         panelTest1.setAlpha(sli.getValue() / 100.0f);
+        showDoc(comboType.getSelectedItem().toString());
     }//GEN-LAST:event_sliStateChanged
 
     private void chComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chComActionPerformed
