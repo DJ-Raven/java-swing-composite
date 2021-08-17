@@ -5,6 +5,9 @@
  */
 package main;
 
+import java.awt.AlphaComposite;
+import java.awt.Color;
+
 /**
  *
  * @author raven
@@ -28,6 +31,19 @@ public class Main extends javax.swing.JFrame {
     private void initComponents() {
 
         panelTest1 = new main.PanelTest();
+        comboType = new javax.swing.JComboBox<>();
+        sli = new javax.swing.JSlider();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        chCom = new javax.swing.JCheckBox();
+        chGrad = new javax.swing.JCheckBox();
+        chBlack = new javax.swing.JCheckBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txt = new javax.swing.JTextPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtCode = new javax.swing.JTextPane();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -35,27 +51,240 @@ public class Main extends javax.swing.JFrame {
         panelTest1.setLayout(panelTest1Layout);
         panelTest1Layout.setHorizontalGroup(
             panelTest1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1014, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         panelTest1Layout.setVerticalGroup(
             panelTest1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 725, Short.MAX_VALUE)
+            .addGap(0, 499, Short.MAX_VALUE)
         );
+
+        comboType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "SrcOver ( Default )", "Clear", "Src", "SrcIn", "SrcOut", "SrcAtop", "Dst", "DstOver", "DstIn", "DstOut", "DstAtop", "Xor" }));
+        comboType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboTypeActionPerformed(evt);
+            }
+        });
+
+        sli.setValue(100);
+        sli.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sliStateChanged(evt);
+            }
+        });
+
+        jLabel1.setText("AlphaComposite Rule");
+
+        jLabel2.setText("Alpha");
+
+        chCom.setSelected(true);
+        chCom.setText("Enable Composite");
+        chCom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chComActionPerformed(evt);
+            }
+        });
+
+        chGrad.setText("Gradient With Transparent");
+        chGrad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chGradActionPerformed(evt);
+            }
+        });
+
+        chBlack.setText("Black Background");
+        chBlack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chBlackActionPerformed(evt);
+            }
+        });
+
+        txt.setEditable(false);
+        txt.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        txt.setText("This Is Default AlphaComposite");
+        jScrollPane1.setViewportView(txt);
+
+        txtCode.setEditable(false);
+        txtCode.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
+        jScrollPane2.setViewportView(txtCode);
+
+        jLabel3.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel3.setText("Explain");
+
+        jLabel4.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
+        jLabel4.setText("Sample code");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTest1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelTest1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comboType, 0, 208, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chCom)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(chGrad)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chBlack)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 658, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTest1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(comboType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sli, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chCom, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chBlack, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chGrad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTest1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void comboTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTypeActionPerformed
+        if (chCom.isSelected()) {
+            String val = comboType.getSelectedItem().toString();
+            if (val.equals("Clear")) {
+                panelTest1.setAlpcom(AlphaComposite.CLEAR);
+            } else if (val.equals("Src")) {
+                panelTest1.setAlpcom(AlphaComposite.SRC);
+            } else if (val.equals("Dst")) {
+                panelTest1.setAlpcom(AlphaComposite.DST);
+            } else if (val.equals("SrcOver ( Default )")) {
+                panelTest1.setAlpcom(AlphaComposite.SRC_OVER);
+            } else if (val.equals("DstOver")) {
+                panelTest1.setAlpcom(AlphaComposite.DST_OVER);
+            } else if (val.equals("SrcIn")) {
+                panelTest1.setAlpcom(AlphaComposite.SRC_IN);
+            } else if (val.equals("DstIn")) {
+                panelTest1.setAlpcom(AlphaComposite.DST_IN);
+            } else if (val.equals("SrcOut")) {
+                panelTest1.setAlpcom(AlphaComposite.SRC_OUT);
+            } else if (val.equals("DstOut")) {
+                panelTest1.setAlpcom(AlphaComposite.DST_OUT);
+            } else if (val.equals("SrcAtop")) {
+                panelTest1.setAlpcom(AlphaComposite.SRC_ATOP);
+            } else if (val.equals("DstAtop")) {
+                panelTest1.setAlpcom(AlphaComposite.DST_ATOP);
+            } else if (val.equals("Xor")) {
+                panelTest1.setAlpcom(AlphaComposite.XOR);
+            }
+            showDoc(val);
+        }
+    }//GEN-LAST:event_comboTypeActionPerformed
+
+    private void showDoc(String val) {
+        txt.setForeground(Color.BLACK);
+        if (val.equals("Clear")) {
+            txt.setText("Remove rectangle 1 on duplicate with rectangle 2");
+            sampleCode("CLEAR");
+        } else if (val.equals("Src")) {
+            txt.setText("Remove rectangle 1 on duplicate but keep paint graphic on rectangle 2");
+            sampleCode("SRC");
+        } else if (val.equals("Dst")) {
+            txt.setText("Rectangle 2 nothing");
+            sampleCode("DST");
+        } else if (val.equals("SrcOver ( Default )")) {
+            txt.setText("This Is Default AlphaComposite");
+            sampleCode("SRC_OVER");
+        } else if (val.equals("DstOver")) {
+            txt.setText("Remove rectangle 2 on duplicate");
+            sampleCode("DST_OVER");
+        } else if (val.equals("SrcIn")) {
+            txt.setText("Remove rectangle 1 on duplicate but keep paint graphic on Rectangle 2 on location duplicate only");
+            sampleCode("SRC_IN");
+        } else if (val.equals("DstIn")) {
+            txt.setText("Remove rectange 1 on duplicate with location has transparent color on rectangle 2\nSo rectangle 1 has background transparent");
+            sampleCode("DST_IN");
+        } else if (val.equals("SrcOut")) {
+            txt.setText("Remove rectangle 1 on duplicate but keep paint graphic on Rectangle 2 on location not duplicate only");
+            sampleCode("SRC_OUT");
+        } else if (val.equals("DstOut")) {
+            txt.setText("Remove rectange 1 on duplicate with location has full color on rectangle 2\nSo rectangle 1 has background transparent");
+            sampleCode("DST_OUT");
+        } else if (val.equals("SrcAtop")) {
+            txt.setText("Remove rectangle 2 on location not duplicate");
+            sampleCode("SRC_ATOP");
+        } else if (val.equals("DstAtop")) {
+            txt.setText("Remove rectange 1 on duplicate with location has transparent color on rectangle 2\nBut keep paint graphic on rectngle 2 on location not duplicate only\nSo rectangle 1 has background transparent");
+            sampleCode("DST_ATOP");
+        } else if (val.equals("Xor")) {
+            txt.setText("Remove rectange 1 on duplicate with location has full color on rectangle 2\nBut keep paint graphic on rectngle 2 on location not duplicate only\nSo rectangle 1 has background transparent");
+            sampleCode("XOR");
+        }
+    }
+
+    private void sampleCode(String val) {
+        float a = sli.getValue() / 100f;
+        txtCode.setText("BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);\n"
+                + "Graphics2D g2 = img.createGraphics();\n"
+                + "// Create Rectangle 1\n"
+                + "g2.fillRect(x,y,width,height);\n"
+                + "g2.setComposite(AlphaComposite.getInstance(AlphaComposite." + val + ", " + a + "f));\n"
+                + "// Create Rectangle 2\n"
+                + "g2.fillRect(x,y,width,height);");
+    }
+    private void sliStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sliStateChanged
+        panelTest1.setAlpha(sli.getValue() / 100.0f);
+    }//GEN-LAST:event_sliStateChanged
+
+    private void chComActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chComActionPerformed
+        if (chCom.isSelected()) {
+            comboTypeActionPerformed(evt);
+        } else {
+            panelTest1.setAlpcom(0);
+            txt.setText("AlphaComposite is Disable");
+            txt.setForeground(Color.RED);
+        }
+    }//GEN-LAST:event_chComActionPerformed
+
+    private void chGradActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chGradActionPerformed
+        panelTest1.setTransparent(chGrad.isSelected());
+    }//GEN-LAST:event_chGradActionPerformed
+
+    private void chBlackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chBlackActionPerformed
+        panelTest1.setBackground(chBlack.isSelected());
+    }//GEN-LAST:event_chBlackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -93,6 +322,19 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox chBlack;
+    private javax.swing.JCheckBox chCom;
+    private javax.swing.JCheckBox chGrad;
+    private javax.swing.JComboBox<String> comboType;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private main.PanelTest panelTest1;
+    private javax.swing.JSlider sli;
+    private javax.swing.JTextPane txt;
+    private javax.swing.JTextPane txtCode;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package main;
 
 import java.awt.AlphaComposite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
@@ -17,12 +18,35 @@ import javax.swing.ImageIcon;
 
 public class PanelTest extends javax.swing.JPanel {
 
+    public void setBackground(boolean background) {
+        this.background = background;
+        repaint();
+    }
+
+    public void setTransparent(boolean transparent) {
+        this.transparent = transparent;
+        repaint();
+    }
+
+    public void setAlpha(float alpha) {
+        this.alpha = alpha;
+        repaint();
+    }
+
+    public void setAlpcom(int alpcom) {
+        this.alpcom = alpcom;
+        repaint();
+    }
+
     private final Rectangle testing1;
-    private final Rectangle testing2;
     private final Image image;
     private Rectangle selected;
     private Point pointPress;
     private Point selectedLocation;
+    private int alpcom = AlphaComposite.SRC_OVER;
+    private float alpha = 1f;
+    private boolean transparent = false;
+    private boolean background = false;
 
     public PanelTest() {
         initComponents();
@@ -30,14 +54,11 @@ public class PanelTest extends javax.swing.JPanel {
         setOpaque(false);
         image = new ImageIcon(getClass().getResource("/main/image.jpg")).getImage();
         testing1 = new Rectangle(5, 5, 300, 300);
-        testing2 = new Rectangle(5, 310, 300, 300);
         addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent me) {
                 if (testing1.contains(me.getPoint())) {
                     selected = testing1;
-                } else if (testing2.contains(me.getPoint())) {
-                    selected = testing2;
                 }
                 pointPress = me.getPoint();
                 if (selected != null) {
@@ -101,16 +122,22 @@ public class PanelTest extends javax.swing.JPanel {
         g2.setColor(new Color(240, 240, 240));
         g2.drawImage(image, x, y, size, size, null);
         g2.setColor(new Color(60, 60, 60));
-        g2.drawString("Buffered Image Rectangle", x + 5, y + 15);
+        g2.drawString("Rectangle 1", x + 5, y + 15);
         //  Composite
-        g2.setComposite(AlphaComposite.DstIn);
+        if (alpcom != 0) {
+            g2.setComposite(AlphaComposite.getInstance(alpcom, alpha));
+        }
         //  Create Sample 1
-        GradientPaint gra = new GradientPaint(0, testing1.y, new Color(228, 52, 52), 0, testing1.y + testing1.height, new Color(228, 52, 52, 0));
+        GradientPaint gra = new GradientPaint(0, testing1.y, new Color(228, 52, 52), 0, testing1.y + testing1.height, transparent ? new Color(228, 52, 52, 0) : new Color(228, 52, 52));
         g2.setPaint(gra);
         g2.fillRect(testing1.x, testing1.y, testing1.width, testing1.height);
         g2.setComposite(AlphaComposite.SrcOver);
-        g2.setColor(Color.red);
+        g2.setColor(Color.WHITE);
+        float[] dash = {2f, 0f, 2f};
+        BasicStroke stroke = new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND, 1.0f, dash, 2f);
+        g2.setStroke(stroke);
         g2.drawRect(testing1.x, testing1.y, testing1.width, testing1.height);
+        g2.drawString("Rectangle 2", testing1.x + 5, testing1.y + 15);
         g2.dispose();
         return img;
     }
@@ -128,7 +155,11 @@ public class PanelTest extends javax.swing.JPanel {
                 if (column) {
                     g2.setColor(getBackground());
                 } else {
-                    g2.setColor(new Color(100, 100, 100));
+                    if (background) {
+                        g2.setColor(getBackground());
+                    } else {
+                        g2.setColor(new Color(100, 100, 100));
+                    }
                 }
                 g2.fillRect(x, y, size, size);
                 x += size;
